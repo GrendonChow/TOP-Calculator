@@ -24,6 +24,8 @@ function buttonPress(button)
             clearCalc();
             break;
         case(button == 'Delete'):
+            displayNumber = displayNumber.slice(0, -1);
+            displayInput(displayNumber);
             break;
         case(button  == '='):
             operandTwo = parseInt(displayNumber);
@@ -58,7 +60,15 @@ function operation()
 }
 function displayInput(num)
 {
-    input.textContent = num;
+    if(num == '')
+    {
+        input.textContent = '0';
+    }
+    else
+    {
+        input.textContent = num;
+    }
+
 }
 
 function clearCalc()
