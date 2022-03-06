@@ -58,6 +58,8 @@ function operation()
     operandOne = parseInt(displayNumber);
     displayNumber = '';
 }
+
+//Displays number to screen, shoes 0 if no inpt exists.
 function displayInput(num)
 {
     if(num == '')
@@ -80,6 +82,7 @@ function clearCalc()
     displayInput("0");
 }
 
+//Perform math oerpations based on parameters.
 function operate(operandOne, operator, operandTwo)
 {
     switch(operator)
