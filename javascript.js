@@ -1,3 +1,8 @@
+//TODO: Optional feature HISTORY
+//      Chaining operations
+//      disable decimal point
+//      rounding
+
 let operandOne = '';
 let operandTwo = '';
 let operator = null;
@@ -16,7 +21,7 @@ function buttonPress(button)
 {
     switch(true)
     {
-        case(!isNaN(button)):
+        case( button == '.' || !isNaN(button)):
             displayNumber = "" + displayNumber + button;
             displayInput(displayNumber);
             break;
@@ -28,34 +33,31 @@ function buttonPress(button)
             displayInput(displayNumber);
             break;
         case(button  == '='):
-            operandTwo = parseInt(displayNumber);
+            operandTwo = parseFloat(displayNumber);
             displayInput(operate(operandOne, operator, operandTwo));
             displayNumber = '';
             break;
         case(button == '+'):
-            operator = button;
-            operation();
+            operation(button);
             break;
         case(button  == '-'):
-            operator = button;
-            operation();
+            operation(button);
             break;
         case(button  == 'x'):
-            operator = button;
-            operation();
+            operation(button);
             break;
         case(button  == '÷'):
-            operator = button;
-            operation();
+            operation(button);
             break;
     }
 }
 
 //Used to prepare for next operand.
-function operation()
+function operation(button)
 {
+    operator = button;
     displayInput('0');
-    operandOne = parseInt(displayNumber);
+    operandOne = parseFloat(displayNumber);
     displayNumber = '';
 }
 
@@ -85,6 +87,7 @@ function clearCalc()
 //Perform math oerpations based on parameters.
 function operate(operandOne, operator, operandTwo)
 {
+    console.log(operandOne + " " + operandTwo)
     switch(operator)
     {
         case '+':
