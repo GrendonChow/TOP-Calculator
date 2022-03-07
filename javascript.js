@@ -7,7 +7,8 @@ let operandOne = '';
 let operandTwo = '';
 let operator = null;
 let func = null;
-let displayNumber = '';
+let inputNumber = '';
+let result = 0;
 
 const input = document.querySelector('.input');
 
@@ -22,20 +23,23 @@ function buttonPress(button)
     switch(true)
     {
         case( button == '.' || !isNaN(button)):
-            displayNumber = "" + displayNumber + button;
-            displayInput(displayNumber);
+            inputNumber = "" + inputNumber + button;
+            displayInput(inputNumber);
             break;
         case(button == 'Clear'):
             clearCalc();
             break;
         case(button == 'Delete'):
-            displayNumber = displayNumber.slice(0, -1);
-            displayInput(displayNumber);
+            inputNumber = inputNumber.slice(0, -1);
+            displayInput(inputNumber);
             break;
         case(button  == '='):
-            operandTwo = parseFloat(displayNumber);
-            displayInput(operate(operandOne, operator, operandTwo));
-            displayNumber = '';
+            operandTwo = parseFloat(inputNumber);
+            result = operate(result,operator, operandTwo);
+            displayInput(result);
+            operandOne = result;
+            operandTwo = '';
+            inputNumber = '';
             break;
         case(button == '+'):
             operation(button);
@@ -56,9 +60,29 @@ function buttonPress(button)
 function operation(button)
 {
     operator = button;
-    displayInput('0');
-    operandOne = parseFloat(displayNumber);
-    displayNumber = '';
+    if(operandOne != '' && operandTwo != '')
+    {
+        operandOne = result;
+        operandTwo = parseFloat(inputNumber);
+        result = operate(result, operator, operandTwo);
+        displayInput(result);
+        operandOne = result;
+        operandTwo = '';
+        inputNumber = '';
+    }
+
+    if(operandOne == '')
+    {
+        operandOne = parseFloat(inputNumber);
+        inputNumber = '';
+    }
+    else if(operandTwo == '' && inputNumber != '')
+    {
+        operandTwo = parseFloat(inputNumber);
+        result = operate(operandOne, operator, operandTwo);
+        displayInput(result);
+        inputNumber = '';
+    }
 }
 
 //Displays number to screen, shoes 0 if no inpt exists.
@@ -79,7 +103,7 @@ function clearCalc()
 {
     operandTwo = '';
     operandOne = '';
-    displayNumber = '';
+    inputNumber = '';
     operator = null;
     displayInput("0");
 }
@@ -87,7 +111,6 @@ function clearCalc()
 //Perform math oerpations based on parameters.
 function operate(operandOne, operator, operandTwo)
 {
-    console.log(operandOne + " " + operandTwo)
     switch(operator)
     {
         case '+':
