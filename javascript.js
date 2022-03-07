@@ -1,8 +1,3 @@
-//TODO: Optional feature HISTORY
-//      Chaining operations
-//      disable decimal point
-//      rounding
-
 let inputNumber = '';
 let arr = [];
 
@@ -58,7 +53,7 @@ function buttonPress(button)
     }
 }
 
-//Used to prepare for next operand.
+//Used to display results prepare for next operand.
 function operation(operator)
 {
     if(arr.length == 2)
@@ -77,7 +72,7 @@ function operation(operator)
     }
 }
 
-//Displays number to screen, shoes 0 if no inpt exists.
+//Displays number to screen, shows 0 if no input exists.
 function displayInput(num)
 {
     if(num == '')
@@ -88,9 +83,9 @@ function displayInput(num)
     {
         input.textContent = num;
     }
-
 }
 
+//Reset calculator to default state
 function clearCalc()
 {
     arr = [];
