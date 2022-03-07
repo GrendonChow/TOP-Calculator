@@ -114,7 +114,7 @@ function clearCalc()
 {
     arr = [];
     inputNumber = '';
-    history.textContent = "_";
+    history.innerHTML = '&nbsp;'
     displayInput("0");
 }
 
