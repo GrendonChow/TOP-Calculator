@@ -79,6 +79,7 @@ function operation(operator)
     }
 }
 
+//Used to append and display history of previois math problems
 function displayHistory(operator = '')
 {
     if(operator == '=')
