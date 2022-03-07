@@ -4,8 +4,6 @@ Calculator application that performs basic math operations. Created from HTML, C
 # TO DO
 -Disable decimal point when already in use
 
--History display
-
 -rounding overflow
 
 -Various CCS cool styling eg hover

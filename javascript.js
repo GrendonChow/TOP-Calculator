@@ -1,7 +1,9 @@
 let inputNumber = '';
 let arr = [];
+let historyNumber = '';
 
 const input = document.querySelector('.input');
+const history = document.querySelector('.history');
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach(button => {
@@ -29,8 +31,9 @@ function buttonPress(button)
             {
                 result = operate(arr[0], arr[1], inputNumber);
                 displayInput(result);
-                arr = [];
+                displayHistory(button)
                 inputNumber = result;
+                arr = [];
             }
             else{
                 displayInput('Error');
@@ -39,15 +42,19 @@ function buttonPress(button)
 
             break;
         case(button == '+'):
+            displayHistory(button);
             operation(button);
             break;
         case(button  == '-'):
+            displayHistory(button);
             operation(button);
             break;
         case(button  == 'x'):
+            displayHistory(button);
             operation(button);
             break;
         case(button  == '÷'):
+            displayHistory(button);
             operation(button);
             break;
     }
@@ -72,6 +79,23 @@ function operation(operator)
     }
 }
 
+function displayHistory(operator = '')
+{
+    if(operator == '=')
+    {
+        historyNumber = '' + historyNumber + ' ' + arr[1]+ ' '+ inputNumber + ' ' + operator;
+    }
+    else if(arr[0] == undefined)
+    {
+        historyNumber = inputNumber;
+    }
+    else
+    {
+        historyNumber = historyNumber + ' ' + operator + ' ' + inputNumber;
+    }
+    history.textContent = historyNumber;
+
+}
 //Displays number to screen, shows 0 if no input exists.
 function displayInput(num)
 {
@@ -90,6 +114,7 @@ function clearCalc()
 {
     arr = [];
     inputNumber = '';
+    history.textContent = "_";
     displayInput("0");
 }
 
