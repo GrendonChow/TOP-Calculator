@@ -3,12 +3,8 @@
 //      disable decimal point
 //      rounding
 
-let operandOne = '';
-let operandTwo = '';
-let operator = null;
-let func = null;
 let inputNumber = '';
-let result = 0;
+let arr = [];
 
 const input = document.querySelector('.input');
 
@@ -34,12 +30,18 @@ function buttonPress(button)
             displayInput(inputNumber);
             break;
         case(button  == '='):
-            operandTwo = parseFloat(inputNumber);
-            result = operate(result,operator, operandTwo);
-            displayInput(result);
-            operandOne = result;
-            operandTwo = '';
-            inputNumber = '';
+            if(arr.length == 2)
+            {
+                result = operate(arr[0], arr[1], inputNumber);
+                displayInput(result);
+                arr = [];
+                inputNumber = result;
+            }
+            else{
+                displayInput('Error');
+                inputNumber = '';
+            }
+
             break;
         case(button == '+'):
             operation(button);
@@ -57,30 +59,20 @@ function buttonPress(button)
 }
 
 //Used to prepare for next operand.
-function operation(button)
+function operation(operator)
 {
-    operator = button;
-    if(operandOne != '' && operandTwo != '')
+    if(arr.length == 2)
     {
-        operandOne = result;
-        operandTwo = parseFloat(inputNumber);
-        result = operate(result, operator, operandTwo);
+        result = operate(arr[0], arr[1], inputNumber);
+        arr[0] = result;
+        arr[1] = operator;
         displayInput(result);
-        operandOne = result;
-        operandTwo = '';
         inputNumber = '';
     }
-
-    if(operandOne == '')
+    else
     {
-        operandOne = parseFloat(inputNumber);
-        inputNumber = '';
-    }
-    else if(operandTwo == '' && inputNumber != '')
-    {
-        operandTwo = parseFloat(inputNumber);
-        result = operate(operandOne, operator, operandTwo);
-        displayInput(result);
+        arr.push(inputNumber);
+        arr.push(operator);
         inputNumber = '';
     }
 }
@@ -101,16 +93,17 @@ function displayInput(num)
 
 function clearCalc()
 {
-    operandTwo = '';
-    operandOne = '';
+    arr = [];
     inputNumber = '';
-    operator = null;
     displayInput("0");
 }
 
-//Perform math oerpations based on parameters.
+//Perform math operations based on parameters.
 function operate(operandOne, operator, operandTwo)
 {
+    let result = 0;
+    operandOne = parseFloat(operandOne);
+    operandTwo = parseFloat(operandTwo);
     switch(operator)
     {
         case '+':
