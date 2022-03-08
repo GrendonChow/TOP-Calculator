@@ -18,6 +18,11 @@ function buttonPress(button)
         case( button == '.' || !isNaN(button)):
             inputNumber = "" + inputNumber + button;
             displayInput(inputNumber);
+            if(button == '.')
+            {
+                document.getElementById("decimalBtn").disabled = true;
+                console.log("TEST");
+            }
             break;
         case(button == 'Clear'):
             clearCalc();
@@ -39,7 +44,7 @@ function buttonPress(button)
                 displayInput('Error');
                 inputNumber = '';
             }
-
+            document.getElementById("decimalBtn").disabled = false;
             break;
         case(button == '+'):
             displayHistory(button);
@@ -77,6 +82,7 @@ function operation(operator)
         arr.push(operator);
         inputNumber = '';
     }
+    document.getElementById("decimalBtn").disabled = false;
 }
 
 //Used to append and display history of previois math problems
